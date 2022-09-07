@@ -12,55 +12,55 @@
 using namespace std;
 
 
-int main() {
-    int n;
-    cin>>n;
-    int arr1[n];
-    bool flag = false;
-    for(int i=0;i<n;i++)
-    {
-        cin>>arr1[i];
-    }
-    int m;
-    cin>>m;
-    int arr2[m];
-    for(int j=0;j<m;j++)
-    {
-        cin>>arr2[j];
-    }
+struct node
+{
+ int num;
+ node *next;
+};
 
-    vector<int> res;
-    int count= 0;
-    for(int i=0;i<n;i++)
-    {
-        cout<<arr1[i]<<" ";
-        if(arr1[i]%2==0)
-        {
-            flag = true;
-            res.emplace_back(i);
-            count=i;
-        }
-    }
-for(int j=0;j<m;j++)
-    {
-      cout<<arr2[j]<<" ";
-        if(arr2[j]%2==0)
-         {
-            flag = true; 
-            res.emplace_back(j+count+1);
-      }
-    }
-    cout<<endl;
-    if(flag)
-    {
-        for(int i=0;i<res.size();i++)
-       {
-            cout<<res[i]<<" ";
-      }
-    }
+int n;
+node *start = NULL;
+int Count = 0;
+
+void Insert(int n)
+{
+ node *ptr = new node;
+ ptr->num = n;
+ 
+ if(n != -1 && n > 0 && n % 2 != 0)
+ {
+ Count++;
+ }
+ 
+ if(start == NULL)
+ {
+ ptr->next = NULL;
+ start = ptr;
+ }
+    
     else
-    {
-        cout<<-1;
-    }
-
+ {
+ ptr->next = start;
+ start = ptr;
+ }
 }
+
+int main() {
+
+ /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+ while(n != -1)
+ {
+ cin >> n;
+ Insert(n);
+ }
+ if(Count == 0)
+ {
+ cout << "No odd number present";
+ }
+ else
+ {
+ cout << Count;
+ }
+ return 0;
+}
+
